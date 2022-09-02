@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Warenkorb {
 
     private double betrag;
@@ -8,8 +11,9 @@ public class Warenkorb {
     public void kaufen(Artikel a){
         betrag += a.getPreis();
         anzahl++;
-
-        arr[anzahl-1] = a.getBez();
+        if (anzahl<betrag){arr[anzahl-1] = a.getBez();}else {
+            System.out.println("array is full");
+        }
 
     }
 
@@ -18,7 +22,6 @@ public class Warenkorb {
         return betrag;
     }
     public double rechnung(){
-        System.out.println(betrag);
         betrag = 0.0;
         arr = new String[arr.length];
         return betrag;
@@ -28,5 +31,17 @@ public class Warenkorb {
         for (int i=0; i< arr.length;i++){
             System.out.println(arr[i]);
         }
+    }
+    public void loeschen(String x){
+        String[] copy = new String[arr.length-1];
+        int k =0;
+
+        for (int i = 0;i< arr.length; i++){
+            if (arr[i] != x){
+                copy[k++] = arr[i];
+            }
+        }
+        System.out.println(Arrays.toString(copy));
+
     }
 }
